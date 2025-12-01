@@ -33,6 +33,8 @@
   
   - Приложения:
     - [catalog](catalog)
+        - [management](catalog/management)
+          - [commands](catalog/management/commands) 
         - [migrations](catalog/migrations)
         - [templates](catalog/templates)
         - [admin.py](catalog/admin.py)
@@ -41,6 +43,7 @@
         - [tests.py](catalog/tests.py)
         - [urls.py](catalog/urls.py)
         - [views.py](catalog/views.py)
+        - [media](media)
       
 - [requirements.txt](requirements.txt)
 - [README.md](README.md)
