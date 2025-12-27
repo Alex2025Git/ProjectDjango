@@ -1,6 +1,8 @@
 import time
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+
+from catalog.models import Product, Category
 
 
 def main(request):
@@ -21,4 +23,19 @@ def catalogs(request):
 
 
 def category(request):
-    return render(request, "category.html")
+    categories = Category.objects.all()
+    context = {"categories": categories}
+    return render(request, "category.html", context)
+
+
+def categories_list(request,category_id):
+    products = Product.objects.filter(category=category_id)
+    context = {"products": products}
+    return render(request, "categories_list.html", context)
+
+
+def products_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    context = {"product": product}
+    return render(request, "products_detail.html", context)
+
