@@ -1,0 +1,36 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% load my_tags %}
+{% block content %}
+<div class="container ">
+    <div class="row">
+        <div class="row-1 text-center">
+            <a class="btn btn-success " data-toggle="button" aria-pressed="false"
+               href="{% url 'blog:blogrecord_create' %}" role="button">+ Опубликовать</a>
+        </div>
+        <div class="row">
+            {% for blog in object_list %}
+            <div class="col">
+                <hr class="my-2 border-0"/>
+                <form class="row g-3" method="post" enctype="multipart/form-data">
+                    <div class="card shadow-sm d-flex justify-content-center align-items-center">
+                        <img  width="200" src="{{ blog.preview | media_filter }}" alt=''>
+                        <div class="card-body">
+                            {{ blog.title }}
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn btn-sm btn-outline-secondary"
+                               href="{% url 'blog:blogrecord_detail' blog.pk %}" role="button">Посмотреть</a>
+                            <a class="btn btn-sm btn-outline-secondary"
+                               href="{% url 'blog:blogrecord_update' blog.pk %}" role="button">Редактировать</a>
+                            <a class="btn btn-sm btn-outline-danger"
+                               href="{% url 'blog:blogrecord_delete' blog.pk %}" role="button">Удалить</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

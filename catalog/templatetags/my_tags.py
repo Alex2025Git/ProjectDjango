@@ -10,7 +10,7 @@ register = template.Library()
 def media_filter(path):
     if path:
         return f'/media/{path}'
-    return '#'
+    return ''
 
 
 @register.filter
@@ -41,5 +41,7 @@ def get_heading(path):
         return 'Заказы'
     elif 'contacts' in path:
         return 'Контакты'
+    elif 'blogs' in path:
+        return 'B L O G'
     else:
         return 'Главная'

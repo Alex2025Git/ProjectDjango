@@ -1,0 +1,29 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form class="row" method="post" enctype="multipart/form-data">
+                <div class="card">
+                   <div class="card-body text-center">
+                       {% csrf_token %}
+                       {{ form.as_p }}
+                    </div>
+                    <div class="btn-group">
+                    <button type="submit" class="btn btn-mx btn-outline-success">
+                        {% if object %}
+                        Сохранить
+                        {% else %}
+                        Создать
+                        {% endif %}
+                    </button>
+                      <a class="btn btn-mx btn-outline-danger"  href="{% url 'blog:blogrecord_list' %}">
+                       Отменить
+                    </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

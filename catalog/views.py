@@ -2,40 +2,41 @@ import time
 
 from django.shortcuts import render, get_object_or_404
 
-from catalog.models import Product, Category
+from django.views.generic import ListView, DetailView, View, TemplateView
+from unicodedata import category
+
+from catalog.models import Product,Category
 
 
-def main(request):
-    return render(request, "main.html")
+class MainTemplateView(TemplateView):
+    template_name = "catalog/main.html"
 
 
-def contacts(request):
-    if request.method == "POST":
-        name = request.POST["name"]
-        email = request.POST["email"]
-        message = request.POST["messageInput"]
-        time.sleep(2)
-    return render(request, "contacts.html")
+class ContactsTemplateView(TemplateView):
+    template_name = "catalog/contacts.html"
+
+    # if request.method == "POST":
+    #     name = request.POST["name"]
+    #     email = request.POST["email"]
+    #     message = request.POST["messageInput"]
+    #     time.sleep(2)
+    # return render(request, "catalog/contacts.html")
 
 
-def catalogs(request):
-    return render(request, "catalogs.html")
+class CatalogsTemplateView(TemplateView):
+    template_name = "catalog/catalogs.html"
 
 
-def category(request):
-    categories = Category.objects.all()
-    context = {"categories": categories}
-    return render(request, "category.html", context)
+class CategoryListView(ListView):
+    model = Category
 
 
-def categories_list(request,category_id):
-    products = Product.objects.filter(category=category_id)
-    context = {"products": products}
-    return render(request, "categories_list.html", context)
+class ProductListView(ListView):
+    model = Product
+
+    def get_queryset(self):
+        return Product.objects.filter(category_id=self.kwargs.get("category_id"))
 
 
-def products_detail(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    context = {"product": product}
-    return render(request, "products_detail.html", context)
-
+class ProductDetailView(DetailView):
+    model = Product
