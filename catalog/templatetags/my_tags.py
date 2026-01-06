@@ -1,3 +1,4 @@
+from idlelib.configdialog import is_int
 
 from django import template
 
@@ -36,7 +37,9 @@ def get_heading(path):
         return Category.objects.get(id=category_id).name
     if 'products' in path:
         product_id = path.split('/')[2]
-        return Product.objects.get(id=product_id).name
+        if product_id.isdigit() :
+            return Product.objects.get(id=product_id).name
+        return 'Главная'
     elif 'catalogs' in path:
         return 'Заказы'
     elif 'contacts' in path:
@@ -45,3 +48,10 @@ def get_heading(path):
         return 'B L O G'
     else:
         return 'Главная'
+
+
+@register.filter
+def get_referer(path):
+    if 'categories' in path._store.get('referer')[1]:
+        return f"/categories/{path._store.get('referer')[1].split('/')[4]}"
+    return '/category'
