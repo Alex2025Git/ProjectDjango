@@ -44,6 +44,7 @@
         - [urls.py](catalog/urls.py)
         - [views.py](catalog/views.py)
         - [media](media)
+    - [blog](blog/templates/blog)
       
 - [requirements.txt](requirements.txt)
 - [README.md](README.md)

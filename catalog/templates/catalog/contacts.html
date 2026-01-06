@@ -1,0 +1,55 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<div class="container mx-1 ">
+    <div class="row">
+        <div class="col-md-6">
+            <form class=" card px-4 py-3" action="" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <i class="bi bi-person"></i>
+                    <label for="name" class="form-label">Имя</label>
+                    <input class="form-control" id="name" name="name" placeholder="">
+                </div>
+                <div class="mb-3">
+                    <i class="bi bi-envelope"></i>
+                    <label for="email" class="form-label">Почта</label>
+                    <div class="input-group">
+                        <span class="input-group-text">@</span>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="messageInput" class="form-label">Сообщение</label>
+                    <textarea class="form-control" id="messageInput" name="messageInput" rows="4"
+                              placeholder=""></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#testModal">
+                    Отправить
+                </button>
+                <div class="modal fade" id="testModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Сообщение</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Закрыть"></button>
+                            </div>
+                            <div class="modal-body">
+                                Данные успешно отправлены
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col">
+            <h2>Наши контакты</h2>
+            <p>Телефон: +1 (111) 111-11-11</p>
+            <p>Email: info@test.ru</p>
+            <p>Адрес: г. Тест, ул. Тестовая, д. 1</p>
+        </div>
+    </div>
+</div>
+{%endblock%}

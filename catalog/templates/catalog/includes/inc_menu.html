@@ -1,0 +1,55 @@
+{% load my_tags %}
+<div class="d-flex flex-column flex-shrink-0 p-2 bg-black  " style="width: 250px; height: 100vh;">
+    <a href="/home" class="d-flex align-items-center mb-0 mb-md-0 me-md-auto text-decoration-none">
+        <i class="bi bi-bootstrap-fill fs-1" style="color: #fff;"></i>
+        <span class="fs-4 text-white px-2">Меню</span>
+    </a>
+    <!--разделитель-->
+    <hr class="my-3 border-bottom border-1 border-light"/>
+
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item ">
+            <a href="{% url 'catalog:main' %}" class="nav-link  {{request.path|active_class:'/'}}">
+                <i class=" bi- bi-house"></i>
+                Главная
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'catalog:category_list' %}" class="nav-link  {{request.path|active_class:'category'}}">
+                <i class="bi bi-speedometer2"></i>
+                Категории
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'catalog:catalogs' %}" class="nav-link  {{request.path|active_class:'catalogs'}}">
+                <i class="bi bi-box-seam"></i>
+                Заказы
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'catalog:contacts' %}" class="nav-link  {{request.path|active_class:'contacts'}}">
+                <i class="bi bi-person-lines-fill"></i>
+                Контакты
+            </a>
+        </li>
+    </ul>
+    <!--разделитель-->
+    <hr class="my-5 border-bottom border-1 border-light"/>
+</div>
+<div class="dropdown position-absolute bottom-0 start-0 mx-2 my-3">
+    <!--  перенос элемента в конец страницы-->
+    <div class="btn-group dropup">
+        <button class="btn dropdown-toggle text-white" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+            <i class="bi bi-person"></i>
+            Пользователь
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" href="#">Профиль</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>                      <!--разделитель меню-->
+            <li><a class="dropdown-item" href="#">Выход</a></li>
+        </ul>
+    </div>
+</div>

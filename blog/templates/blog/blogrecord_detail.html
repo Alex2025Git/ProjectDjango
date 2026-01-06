@@ -1,0 +1,36 @@
+
+
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="album py-5 bg-body-tertiary">
+    <div class="container ">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3 d-flex justify-content-center">
+            <div class="col ">
+                <div class="card shadow-sm ">
+                    <img src="{{ object.preview | media_filter }}" alt="">
+                    <div class="card-body">
+                        <h4>{{object.title}}</h4>
+                        <p class="card-text">Описание: {{ object.description }}</p>
+
+                        {% if object.is_published %}
+                         <p class="card-text">Публикуется: Да</p>
+                        {% else %}
+                        <p class="card-text">Публикуется: Нет</p>
+                        {%endif%}
+                          <p class="card-text">Дата создания: {{ object.created_at }}</p>
+                          <p class="card-text">Дата изменения: {{ object.updated_at }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a type="button" class="btn btn-sm btn-outline-secondary"
+                                   href="{% url 'blog:blogrecord_list' %}"
+                                   role="button">Назад</a>
+                            </div>
+                            <small class="text-body-secondary">Просмотры: {{ object.count_views}}</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
