@@ -1,11 +1,9 @@
-import time
+from django.urls import reverse_lazy
 
-from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
-from django.views.generic import ListView, DetailView, View, TemplateView
-from unicodedata import category
-
-from catalog.models import Product,Category
+from catalog.forms import ProductForm
+from catalog.models import Product, Category
 
 
 class MainTemplateView(TemplateView):
@@ -40,3 +38,30 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
     model = Product
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+
+    def get_success_url(self):
+        return reverse_lazy('catalog:product_detail', kwargs={'pk': self.object.pk})
+
+    def get_initial(self):
+        referer = self.request.META.get('HTTP_REFERER')
+        if 'categories' in referer:
+            return {'category': Category.objects.get(pk=referer.split('/')[4])}
+        return {}
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+
+    def get_success_url(self):
+        return reverse_lazy('catalog:product_detail', kwargs={'pk': self.object.pk})
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('catalog:category_list')

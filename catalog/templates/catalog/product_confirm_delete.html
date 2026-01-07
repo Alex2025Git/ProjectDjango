@@ -1,0 +1,24 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form method="post">
+                <div class="card mx-5">
+                    <h5 class="card-text text-center my-2"> Действительно хотите удалить статью "{{ object.name }}" ? </h5>
+                    <div class="card-body mx-5">
+                        {% csrf_token %}
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-mx btn-outline-danger" role="button">Удалить
+                        </button>
+                        <a type="button" class="btn btn-mx btn-outline-secondary"
+                           href="{% url 'catalog:product_detail' object.pk %}" role="button">Отменить</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
