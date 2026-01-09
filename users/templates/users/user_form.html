@@ -1,0 +1,30 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form class="row" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-body text-left">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-mx btn-outline-success">
+                            {% if user.is_authenticated %}
+                            Сохранить
+                            {% else %}
+                            Зарегистрироваться
+                            {% endif %}
+                        </button>
+                        {% if user.is_authenticated %}
+                        <a class="btn btn-mx btn-outline-danger" href="{% url 'users:user_detail' user.pk %}">
+                            Отменить </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

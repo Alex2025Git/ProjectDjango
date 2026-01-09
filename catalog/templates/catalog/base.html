@@ -20,7 +20,7 @@
             <!--разделитель-->
             <hr class="my-5 border-0"/>
             <div class="container text-center mt-5">
-                <h1>{{ request.path|get_heading }}</h1>
+                <h1>{{ request.path|get_heading:request }}</h1>
                 <h6>Вы находитесь на сайте, предназначеном для продажи товаров</h6>
             </div>
             <!--разделитель-->

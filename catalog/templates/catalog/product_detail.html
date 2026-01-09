@@ -16,12 +16,14 @@
                     <a type="button" class="btn btn-sm btn-outline-secondary"
                        href="{% url 'catalog:product_list' object.category.id %}"
                        role="button"><i class="bi bi-arrow-left"></i></a>
+                    {% if user.is_authenticated %}
                     <a type="button" class="btn btn-sm btn-outline-secondary"
                        href="{% url 'catalog:product_update' object.id %}"
                        role="button">Изменить</a>
                     <a type="button" class="btn btn-sm btn-outline-danger"
                        href="{% url 'catalog:product_delete' object.id %}"
                        role="button">Удалить</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
