@@ -44,9 +44,9 @@
                 aria-expanded="false">
             <i class="bi bi-person"></i>
             {% if user.nik_name is None %}
-            Пользователь
+            {{user.email|truncatechars:20}}
             {% else %}
-            {{user.nik_name}}
+            {{user.nik_name|truncatechars:20}}
             {% endif %}
         </button>
         <form class="row" method="post" enctype="multipart/form-data">

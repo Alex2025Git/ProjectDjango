@@ -22,9 +22,9 @@
                         <a class="btn btn-mx btn-outline-danger" href="{% url 'catalog:product_detail' object.id %}">
                             Отменить </a>
                         {% else %}
-                        <a class="btn btn-mx btn-outline-danger" href= "{{request.headers | get_referer}}">
+                        <a class="btn btn-mx btn-outline-danger" href="{{request.headers | get_referer}}">
                             Отменить
-<!--                            "{% url 'catalog:category_list' %}"-->
+                            <!--                            "{% url 'catalog:category_list' %}"-->
                         </a>
                         {% endif %}
                     </div>
