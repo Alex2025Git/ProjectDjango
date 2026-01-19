@@ -9,6 +9,7 @@ from django.views.generic import ListView, DetailView, TemplateView, CreateView,
 
 from catalog.forms import ProductForm, ProductModeratorForm
 from catalog.models import Product, Category
+from catalog.services import get_category_from_cache, get_product_list_from_cache, get_product_from_cache
 
 
 class MainTemplateView(TemplateView):
@@ -33,17 +34,22 @@ class CatalogsTemplateView(TemplateView):
 class CategoryListView(ListView):
     model = Category
 
+    def get_queryset(self):
+        return get_category_from_cache()
+
 
 class ProductListView(ListView):
     model = Product
 
     def get_queryset(self):
-        return Product.objects.filter(category_id=self.kwargs.get("category_id"))
+        return get_product_list_from_cache(self.kwargs.get("category_id"))
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
+    def get_queryset(self):
+        return get_product_from_cache(self.kwargs.get("pk"))
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
