@@ -1,31 +1,25 @@
 {% extends 'catalog/base.html' %}
-{% load my_tags %}
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col">
             <form class="row" method="post" enctype="multipart/form-data">
                 <div class="card">
-                    <div class="card-body text-center">
+                    <div class="card-body text-left">
                         {% csrf_token %}
                         {{ form.as_p }}
                     </div>
                     <div class="btn-group">
                         <button type="submit" class="btn btn-mx btn-outline-success">
-                            {% if object %}
+                            {% if user.is_authenticated %}
                             Сохранить
                             {% else %}
-                            Создать
+                            Зарегистрироваться
                             {% endif %}
                         </button>
-                        {% if object %}
-                        <a class="btn btn-mx btn-outline-danger" href="{% url 'catalog:product_detail' object.id %}">
+                        {% if user.is_authenticated %}
+                        <a class="btn btn-mx btn-outline-danger" href="{% url 'users:user_detail' user.pk %}">
                             Отменить </a>
-                        {% else %}
-                        <a class="btn btn-mx btn-outline-danger" href="{{request.headers | get_referer}}">
-                            Отменить
-                            <!--                            "{% url 'catalog:category_list' %}"-->
-                        </a>
                         {% endif %}
                     </div>
                 </div>

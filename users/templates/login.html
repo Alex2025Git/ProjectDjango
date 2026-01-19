@@ -1,0 +1,26 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<div class="container ">
+    <div class="row d-flex justify-content-center">
+        <div class="col-5">
+            <form class="row" method="post" enctype="multipart/form-data">
+                <div class="card" >
+                    <div class="card-body text-center">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-mx btn-outline-success">
+                            Войти
+                        </button>
+                    </div>
+                        <p></p>
+                    <p> ИЛИ </p>
+                         <a class="btn btn-mx btn-outline-danger" href="{% url 'users:register' %}">
+                            Зарегистрироваться </a>
+                        </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

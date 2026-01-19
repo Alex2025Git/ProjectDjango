@@ -13,6 +13,7 @@ class ProductForm(ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
+        exclude = ('owner',)
 
     def clean_price(self):
         price = self.cleaned_data['price']
@@ -55,3 +56,9 @@ class ProductForm(ModelForm):
                         find_word = 'description'
                     self.add_error(find_word,
                                    f'Указанное слово "{filter_word}" не может быть использовано в "{find_word}"')
+
+
+class ProductModeratorForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = 'is_published',
